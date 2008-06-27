@@ -17,8 +17,6 @@ set :branch, "master"
 set :deploy_via, :remote_cache
 set :git_shallow_clone, 1
 
-#set :scm_passphrase, "p00p" #This is your custom users password
-
 role :production, host
 
 # ===========================================================================
@@ -48,6 +46,37 @@ namespace :mongrel do
     task command.to_sym do
       run mongrel_cluster(command)
     end
+  end
+  
+end
+
+# ===========================================================================
+# Deployment hooks
+# ===========================================================================
+
+namespace :deploy do
+	
+	desc "Restart mongrel cluster"
+	task :restart do
+  	mongrel.restart
+	end
+	
+  desc "Copy or link in server specific configuration files"
+  task :setup_config do
+    run <<-CMD
+    cp #{release_path}/config/database.yml.example #{release_path}/config/database.yml
+    CMD
+  end
+
+  desc "Run pre-symlink tasks" 
+  task :before_symlink do
+    setup_config
+  end
+  
+  desc "Clear out old code trees. Only keep 5 latest releases around"
+  task :after_deploy do
+    db.migrate
+    cleanup
   end
   
 end
