@@ -75,7 +75,7 @@ namespace :deploy do
   
   desc "Clear out old code trees. Only keep 5 latest releases around"
   task :after_deploy do
-    db.migrate
+    #db.migrate
     cleanup
   end
   
