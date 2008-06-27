@@ -1,0 +1,15 @@
+== Coverizer
+
+Searches different album art archives and displays the images found so you can drag and drop them into your iTunes library.
+
+Currently searches:
+- www.discogs.org
+- www.albumart.org
+
+Upcoming:
+- www.allcdcovers.com
+
+== Discogs pictures not showing
+
+To see pictures form discogs you need to spoof your referer.
+You can use the RefControl plugin for firefox to block the referer.

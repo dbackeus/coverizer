@@ -1,0 +1,10 @@
+<% form_tag root_path, :method => :get do %>
+  Keywords: <%= text_field_tag :keywords %>
+  <%= submit_tag 'Search' %>
+<% end %>
+
+<h1>Discogs Results</h1>
+<%= render :partial => 'covers', :object => @discogs_urls %>
+
+<h1>Albumart Results</h1>
+<%= render :partial => 'covers', :object => @albumart_urls %>
